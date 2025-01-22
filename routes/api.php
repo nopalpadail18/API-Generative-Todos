@@ -30,7 +30,7 @@ Route::middleware('jwt.auth')->group(function () {
     Route::get('/todos', [TodosContoller::class, 'index']);
     Route::post('/todo', [TodosContoller::class, 'store']);
     Route::get('/todo/{id}', [TodosContoller::class, 'show']);
-    Route::put('/todo/{id}', [TodosContoller::class, 'update']);
+    Route::put('/todoUpdate/{id}', [TodosContoller::class, 'update']);
     Route::delete('/todo/{id}', [TodosContoller::class, 'destroy']);
     Route::post('/chatAI', [ChatController::class, 'chatAI']);
 });

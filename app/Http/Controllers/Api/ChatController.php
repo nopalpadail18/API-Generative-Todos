@@ -32,6 +32,10 @@ class ChatController extends Controller
             return response()->json([
                 'message' => 'Tuhan adalah Allah SWT'
             ]);
+        } elseif (strtolower($message) === 'siapa nama pacar nopal' || strtolower($message) === 'siapa nama pacar nopal?') {
+            return response()->json([
+                'message' => 'Nama pacarnya ada Syindy Aulia A'
+            ]);
         }
 
         $response = $this->callGroq($message);

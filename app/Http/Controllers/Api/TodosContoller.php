@@ -58,21 +58,27 @@ class TodosContoller extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama_tugas' => 'sometimes|required|string|max:255',
-            'deskripsi' => 'sometimes|required|string',
-            'deadline' => 'sometimes|required|date',
-            'user_id' => 'sometimes|required|exists:users,id'
+            'selesai' => 'required|boolean',
         ]);
 
         $todo = Todos::findOrFail($id);
 
-        $todo->update($request->only(['nama_tugas', 'deskripsi', 'deadline', 'user_id']));
+        if (!$todo) {
+            return response()->json([
+                'message' => 'Todo not found'
+            ], 404);
+        }
+
+        // Update kolom selesai dengan nilai boolean
+        $todo->selesai = (bool) $request->input('selesai');
+        $todo->save();
 
         return response()->json([
             'message' => 'Todo updated successfully',
             'todo' => $todo
         ]);
     }
+
 
     public function destroy(string $id)
     {
