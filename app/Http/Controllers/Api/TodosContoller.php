@@ -27,14 +27,15 @@ class TodosContoller extends Controller
             'nama_tugas' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'deadline' => 'required|date',
-            'user_id' => 'required|exists:users,id'
         ]);
+
+        $user = \Illuminate\Support\Facades\Auth::user();
 
         $todo = Todos::create([
             'nama_tugas' => $request->input('nama_tugas'),
             'deskripsi' => $request->input('deskripsi'),
             'deadline' => $request->input('deadline'),
-            'user_id' => $request->input('user_id')
+            'user_id' => $user->id
         ]);
 
         return response()->json([
